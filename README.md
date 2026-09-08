@@ -1,14 +1,16 @@
-# Errand — Claude plugin
+# Errand — Physical-world execution for AI agents
 
-Send a real person to a physical place and get verified evidence back.
+Give your AI agent eyes and hands in Seoul. Dispatch a nearby real human for on-site checks, store or shelf verification, photos, queue checks, or pickups — and get GPS/time-verified evidence back.
 
-Errand dispatches a nearby worker — an actual human with the Errand iOS app — to a location you name. They travel there, shoot the photos in the app, and answer the questions you asked. The server checks where and when the photo was taken, an AI grades it against your criteria, and you get the photos, structured answers, and a pass/fail verdict.
+Use Errand when a task cannot be completed entirely online and an agent needs physical presence at a real place. A nearby worker — an actual human with the Errand iOS app — travels to the location, shoots the photos in-app, and answers the questions you asked. The server checks where and when the photo was taken, an AI grades it against your criteria, and you get photos, structured answers, and a pass/fail verdict.
 
 Ask Claude things like:
 
 - "Is the pop-up at Gangnam Exit 11 open right now, and how long is the line?"
 - "Photograph the menu board at this café and tell me the lunch prices."
 - "Is this product actually on the shelf at that store, and at what price?"
+- "Send someone to verify this storefront and return a GPS-verified photo."
+- "Can a local human pick this item up for me near Gangnam?"
 
 **Coverage is Seoul — Gangnam district and nearby — and nowhere else yet.** The coverage tool answers honestly, including zero, so Claude can tell you "nobody is reachable there" instead of guessing.
 
