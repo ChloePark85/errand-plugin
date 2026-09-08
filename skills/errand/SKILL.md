@@ -51,6 +51,8 @@ Call `errand_check_coverage` with `lat`, `lng`, `radius_m` (3000 is a good defau
 
 Pick a task type and a reward, then call `errand_quote` with `task_type`, `lat`, `lng`, `reward_krw` and optionally `radius_m` (default 3000). It creates nothing and reserves nothing.
 
+**If `errand_quote` is not in the tool list**, you are talking to an older server. Work the total out yourself — `total = reward + max(500, reward × 0.2)` — call `errand_list_capabilities` to check `balance_krw` covers it, and confirm with the user exactly as below. Everything else in this section still applies.
+
 | task_type | Use for | Typical reward (KRW) |
 |---|---|---|
 | `check` | Quick status: open? crowded? line length? | 3,000–6,000 |
