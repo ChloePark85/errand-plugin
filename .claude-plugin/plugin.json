@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "errand",
   "displayName": "Errand",
-  "version": "1.1.1",
-  "description": "Send a real person to a place in Seoul to check, photograph, verify, queue, or pick something up, and get GPS- and time-verified evidence back.",
+  "version": "1.1.2",
+  "description": "Physical-world execution for AI agents: dispatch a nearby human in Seoul for on-site checks, store verification, photos, queues, or pickups, with GPS/time-verified evidence.",
   "author": {
     "name": "Ubik Collective",
     "email": "support@errand.be",
@@ -14,10 +14,16 @@
   "license": "MIT",
   "keywords": [
     "mcp",
+    "ai-agents",
+    "physical-world",
     "real-world",
+    "local-human",
     "human-in-the-loop",
+    "on-site-verification",
+    "store-check",
     "photos",
-    "verification",
+    "pickup",
+    "queue",
     "seoul",
     "errands"
   ],
