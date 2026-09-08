@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "errand",
+  "displayName": "Errand",
+  "version": "1.0.0",
+  "description": "Send a real person to a place in Seoul to check, photograph, verify, queue, or pick something up, and get GPS- and time-verified evidence back.",
+  "author": {
+    "name": "Ubik Collective",
+    "email": "support@errand.be",
+    "url": "https://errand.be"
+  },
+  "homepage": "https://errand.be/docs",
+  "repository": "https://github.com/ChloePark85/errand-plugin",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "real-world",
+    "human-in-the-loop",
+    "photos",
+    "verification",
+    "seoul",
+    "errands"
+  ],
+  "mcpServers": {
+    "errand": {
+      "type": "http",
+      "url": "https://errand.be/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_key}"
+      }
+    }
+  },
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Errand API key",
+      "description": "Starts with er_live_. Get one free at https://errand.be — enter an email, type the 6-digit code, and the key is shown once. Add a prepaid balance at https://errand.be/dashboard before dispatching.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
+  "name": "errand",
+  "description": "Errand — dispatch a real person to a place in Seoul and get GPS- and time-verified photos and answers back.",
+  "owner": {
+    "name": "Ubik Collective",
+    "email": "support@errand.be",
+    "url": "https://errand.be"
+  },
+  "plugins": [
+    {
+      "name": "errand",
+      "source": "./",
+      "description": "Send a real person to a place in Seoul and get GPS- and time-verified photos and answers back."
+    }
+  ]
+}
