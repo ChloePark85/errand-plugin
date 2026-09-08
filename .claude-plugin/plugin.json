@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "errand",
   "displayName": "Errand",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Send a real person to a place in Seoul to check, photograph, verify, queue, or pick something up, and get GPS- and time-verified evidence back.",
   "author": {
     "name": "Ubik Collective",

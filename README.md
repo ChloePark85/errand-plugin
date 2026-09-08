@@ -44,10 +44,10 @@ Every API key carries caps its owner sets — reward per task, daily budget, all
 
 ## What is in this plugin
 
-- **MCP connector** to `https://errand.be/api/mcp` (remote, streamable HTTP), exposing six tools: `errand_check_coverage`, `errand_list_capabilities`, `errand_dispatch`, `errand_get_status`, `errand_get_result`, `errand_cancel`.
-- **A skill** that teaches Claude the flow — check coverage, quote the price, get your explicit yes before spending anything, then poll and report the result in plain language.
+- **MCP connector** to `https://errand.be/api/mcp` (remote, streamable HTTP), exposing seven tools: `errand_check_coverage`, `errand_list_capabilities`, `errand_quote`, `errand_dispatch`, `errand_get_status`, `errand_get_result`, `errand_cancel`.
+- **A skill** that teaches Claude the flow — check coverage, ask the server for an exact quote, get your explicit yes before spending anything, then poll and report the result in plain language.
 
-Only `errand_dispatch` moves money, and the skill instructs Claude to state the total and wait for your confirmation first.
+Only `errand_dispatch` moves money. `errand_quote` returns the exact total for free, and the skill instructs Claude to put that number in front of you and wait for a yes before dispatching.
 
 ## Privacy and safety
 

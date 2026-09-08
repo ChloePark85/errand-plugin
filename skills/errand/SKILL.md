@@ -13,6 +13,7 @@ This plugin connects the Errand MCP server, so you call it through tools, not cu
 |---|---|---|
 | `errand_check_coverage` | How many workers a dispatch would reach near a point | no |
 | `errand_list_capabilities` | Balance, caps, allowed task types, fee schedule | no |
+| `errand_quote` | Exact total for a proposed errand, plus whether it can go ahead | no |
 | `errand_dispatch` | Create the mission | **yes — escrows immediately** |
 | `errand_get_status` | Progress and timeline | no |
 | `errand_get_result` | Evidence, answers, verdict | no |
@@ -26,13 +27,15 @@ Full API reference: <https://errand.be/docs>
 
 ## The one rule
 
-**Never call `errand_dispatch` without the user's explicit yes to a stated total price.** It moves money. Everything else is free to call and safe to explore.
+**Never call `errand_dispatch` without the user's explicit yes to a stated total price.** It moves money. Everything else is free to call and safe to explore — including `errand_quote`, which exists precisely so you can state that price accurately instead of computing it yourself.
 
 ## Flow
 
 ```
 check_coverage (free) → quote (free) → user confirms → dispatch → poll status → get_result
 ```
+
+`errand_quote` folds the coverage check, the cap check, the fee arithmetic and the balance check into one call, so in practice you can start there and fall back to `errand_check_coverage` only when you want coverage without a reward in mind.
 
 ### 1. Coverage
 
@@ -46,7 +49,7 @@ Call `errand_check_coverage` with `lat`, `lng`, `radius_m` (3000 is a good defau
 
 ### 2. Quote
 
-Pick a task type and a reward, then show the user the total before doing anything.
+Pick a task type and a reward, then call `errand_quote` with `task_type`, `lat`, `lng`, `reward_krw` and optionally `radius_m` (default 3000). It creates nothing and reserves nothing.
 
 | task_type | Use for | Typical reward (KRW) |
 |---|---|---|
@@ -56,19 +59,28 @@ Pick a task type and a reward, then show the user the total before doing anythin
 | `queue` | Check or hold a spot in a physical line | 10,000–20,000 |
 | `pickup` | Pick up a small item and hold or deliver it nearby | 10,000–20,000 |
 
-A higher reward gets accepted faster. Minimum reward is ₩1,000, and the key's `max_reward_per_task_krw` caps it (default ₩20,000).
+A higher reward gets accepted faster. Minimum reward is ₩1,000, and the account's `max_reward_per_task_krw` caps it (default ₩20,000).
 
-Total = `reward + max(500, reward × 0.2)`. ₩5,000 → ₩6,000. ₩10,000 → ₩12,000.
+The quote comes back with everything you need to ask the question:
 
-Say it like this:
+- `total_charge_krw` — **quote this number to the user, verbatim.** Do not recompute the fee yourself; the server is the authority and the schedule can change.
+- `reward_krw` and `platform_fee_krw` — the split, if the user asks what the fee is.
+- `balance_sufficient` and `balance_krw` — if false, stop and send the user to <https://errand.be/dashboard> to top up.
+- `coverage` — the same shape `errand_check_coverage` returns.
+- `can_dispatch` — true only when workers are reachable **and** the balance covers it.
+- `note` — a plain-language reason when something blocks the dispatch.
 
-> I can send someone to check whether the store is open and photograph the entrance. Reward ₩5,000 + fee ₩1,000 = **₩6,000** from your Errand balance, refunded if nobody completes it. Go ahead?
+If `can_dispatch` is false, say why and stop. Do not dispatch and hope.
 
-Call `errand_list_capabilities` to confirm the balance covers it. If `balance_krw` is short, stop and send the user to <https://errand.be/dashboard>.
+If it is true, put the total in front of the user and wait:
+
+> I can send someone to check whether the store is open and photograph the entrance. That costs **₩6,000** from your Errand balance — ₩5,000 to the worker, ₩1,000 fee — refunded in full if nobody completes it. Go ahead?
+
+A rejected quote costs nothing, so quote freely while the user is still deciding what to ask for.
 
 ### 3. Dispatch
 
-Only after the user says yes. Call `errand_dispatch`.
+Only after the user says yes to the total from `errand_quote`. Call `errand_dispatch` with the same `task_type`, `lat`, `lng`, `radius_m` and `reward_krw` you quoted — changing the reward changes the price the user agreed to.
 
 ```json
 {
