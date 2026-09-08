@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
   "name": "errand",
-  "description": "Errand — dispatch a real person to a place in Seoul and get GPS- and time-verified photos and answers back.",
+  "description": "Errand gives AI agents eyes and hands in Seoul: dispatch a nearby human for on-site checks, store verification, photos, queues, or pickups, with verified evidence back.",
   "owner": {
     "name": "Ubik Collective",
     "email": "support@errand.be",
@@ -11,7 +11,7 @@
     {
       "name": "errand",
       "source": "./",
-      "description": "Send a real person to a place in Seoul and get GPS- and time-verified photos and answers back."
+      "description": "Physical-world execution for AI agents: send a nearby human to a real place for checks, photos, verification, queues, or pickups and receive verified evidence."
     }
   ]
 }
